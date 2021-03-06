@@ -1,0 +1,6 @@
+[program:solfactory-django]
+command = /home/ubuntu/sol-factory/solfactory-env/gunicorn_config
+user = root
+stdout_logfile = /home/ubuntu/sol-factory/logs/gunicorn-supervisor.log
+redirect_stderr = true
+environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8

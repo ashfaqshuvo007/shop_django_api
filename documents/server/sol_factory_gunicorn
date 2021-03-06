@@ -1,0 +1,38 @@
+#!/bin/bash
+NAME="solfactory-django"
+DJANGODIR=/home/ubuntu/sol-factory/sol-factory-django
+SOCKFILE=/home/ubuntu/sol-factory/solfactory-env/run/gunicorn.sock
+USER=root
+GROUP=root
+NUM_WORKERS=2
+NUM_THREADS=3
+NUM_MAX_REQUESTS=1200
+NUM_MAX_JITTER=1800
+DJANGO_SETTINGS_MODULE=settings
+DJANGO_WSGI_MODULE=wsgi
+LOG_FILE_PATH=/home/ubuntu/sol-factory/logs/gunicorn-logs.txt
+GUNICORN_PATH=/home/ubuntu/sol-factory/solfactory-env/bin/
+echo "Starting $NAME as `whoami`"
+# Activate the virtual environment
+cd $DJANGODIR
+source /home/ubuntu/sol-factory/solfactory-env/bin/activate
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+#Create log file if already not there
+test -f $LOG_FILE_PATH || touch $LOG_FILE_PATH
+TIMEOUT=150
+# Start your Django Unicorn
+exec ${GUNICORN_PATH}gunicorn ${DJANGO_WSGI_MODULE}:application \
+    --name $NAME \
+    --workers $NUM_WORKERS \
+    --threads $NUM_THREADS \
+    --timeout $TIMEOUT \
+    --max-requests $NUM_MAX_REQUESTS \
+    --max-requests-jitter $NUM_MAX_JITTER \
+    --user=$USER --group=$GROUP \
+    --bind=unix:$SOCKFILE \
+    --log-level=error \
+    --capture-output

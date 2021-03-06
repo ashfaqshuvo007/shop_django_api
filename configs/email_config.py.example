@@ -1,0 +1,13 @@
+"""
+    Created by tareq on ২৬/৬/১৯
+"""
+
+__author__ = "Tareq"
+
+SYSTEM_FROM_EMAIL = "solfactorydevbd@gmail.com"
+
+EMAIL_HOST = '<BASE EMAIL HOST>' # example: smtp.gmail.com
+EMAIL_PORT = '<PORT NUMBER>'  # example: 587
+EMAIL_HOST_USER = '<USERNAME WILL BE HERE>'
+EMAIL_HOST_PASSWORD = '<PASSWORD WILL BE HERE>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

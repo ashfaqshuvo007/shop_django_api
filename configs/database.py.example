@@ -1,0 +1,16 @@
+"""
+    Created by tareq on ৩/৭/১৯
+"""
+
+__author__ = "Tareq"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'solfactory',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}

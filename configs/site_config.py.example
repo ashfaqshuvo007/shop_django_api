@@ -1,0 +1,7 @@
+"""
+    Created by tareq on ৮/৭/১৯
+"""
+
+__author__ = "Tareq"
+
+SITE_ROOT = "http://52.221.193.41:8080"
